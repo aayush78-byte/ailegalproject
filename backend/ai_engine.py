@@ -17,7 +17,7 @@ def get_ai_risk_explanation(document_risk: Dict, analysis: List[Dict],
     Generate structured AI explanation of contract risks
     
     Args:
-        document_risk: Overall document risk summary
+        document_risk:  Overall document risk summary
         analysis: List of clause analysis results
         provider: LLM provider to use (defaults to config)
     
