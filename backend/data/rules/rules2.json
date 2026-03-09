@@ -1,0 +1,389 @@
+{
+    "rules": [
+        {
+            "rule_id": "IP_COPYRIGHT_OVERREACH_001",
+            "statute": "Copyright Act, 1957 – Section 17 & Section 19",
+            "category": "ip_overreach",
+            "severity": "high",
+            "patterns": {
+                "required_keywords": [
+                    "all intellectual property",
+                    "any intellectual property",
+                    "all inventions",
+                    "any work product",
+                    "all work product",
+                    "any creation",
+                    "all creations",
+                    "all rights reserved to",
+                    "all deliverables",
+                    "all output",
+                    "all results",
+                    "all discoveries",
+                    "intellectual property rights",
+                    "assigns all rights"
+                ],
+                "optional_keywords": [
+                    "irrevocable",
+                    "perpetual",
+                    "worldwide",
+                    "royalty-free",
+                    "outside working hours",
+                    "prior inventions",
+                    "personal projects",
+                    "whether or not",
+                    "developed during"
+                ],
+                "exclusion_keywords": [
+                    "mutual ownership",
+                    "jointly owned",
+                    "joint ownership"
+                ],
+                "regex_patterns": [
+                    "all\\s+(work|creation|invention|intellectual\\s+property|deliverable).*?(belong|vest|assign|transfer)\\s+(to\\s+)?(the\\s+)?(company|employer|client)",
+                    "assigns?\\s+(all|any)\\s+(rights|intellectual\\s+property|copyright|ip)"
+                ]
+            },
+            "conditions": {},
+            "verdict": "High Risk",
+            "confidence": "high",
+            "explanation_template": "This clause attempts to claim ownership of ALL intellectual property including potentially personal projects and prior work. Under the Copyright Act, 1957, employers can only claim work created in the course of employment.",
+            "recommendation": "Limit IP assignment to work specifically created for this engagement. Explicitly exclude prior inventions and personal projects by attaching a schedule.",
+            "legal_reference": "Copyright Act, 1957, Section 17: The employer is the first owner of copyright in works made by employees in the course of their employment. Section 19: Assignment must be in writing.",
+            "examples": [
+                "All intellectual property created by Employee belongs to the Company.",
+                "Employee assigns all rights to any work or invention to the Company."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "IP_COPYRIGHT_MORAL_RIGHTS_001",
+            "statute": "Copyright Act, 1957 – Section 57",
+            "category": "ip_overreach",
+            "severity": "medium",
+            "patterns": {
+                "required_keywords": [
+                    "waive moral rights",
+                    "waiver of moral rights",
+                    "no moral rights",
+                    "renounce moral rights",
+                    "surrender moral rights",
+                    "moral rights are waived",
+                    "hereby waive",
+                    "waives any right of attribution",
+                    "waives right of integrity"
+                ],
+                "optional_keywords": [
+                    "copyright",
+                    "authorship",
+                    "attribution",
+                    "integrity",
+                    "right of paternity"
+                ],
+                "exclusion_keywords": [],
+                "regex_patterns": [
+                    "waive[s]?\\s+(all\\s+)?(moral\\s+rights|right\\s+of\\s+attribution|right\\s+of\\s+integrity)"
+                ]
+            },
+            "conditions": {},
+            "verdict": "Potentially Void",
+            "confidence": "high",
+            "explanation_template": "This clause asks you to waive your moral rights as an author. Under Section 57 of the Copyright Act, 1957, moral rights cannot be waived by contract and such waivers are void in India.",
+            "recommendation": "This waiver is unenforceable under Indian law. Flag it to the other party and request its removal to avoid disputes.",
+            "legal_reference": "Copyright Act, 1957, Section 57: Author's moral rights (right to claim authorship and restrain distortion of work) are inalienable and cannot be waived.",
+            "examples": [
+                "Employee hereby waives all moral rights in the work product.",
+                "Author waives any right of attribution or integrity in the created works."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "IP_PATENT_ASSIGN_001",
+            "statute": "Patents Act, 1970 – Section 6",
+            "category": "ip_overreach",
+            "severity": "high",
+            "patterns": {
+                "required_keywords": [
+                    "patent",
+                    "invention",
+                    "patentable",
+                    "patentable invention",
+                    "all patents",
+                    "patent rights",
+                    "patent application",
+                    "assign patent",
+                    "transfer patent"
+                ],
+                "optional_keywords": [
+                    "prior inventions",
+                    "future inventions",
+                    "all patents",
+                    "any patent",
+                    "any invention",
+                    "prior to employment"
+                ],
+                "exclusion_keywords": [
+                    "in the course of employment only",
+                    "company's field only"
+                ],
+                "regex_patterns": [
+                    "assign.*?(all|any).*?patent",
+                    "(all|any)\\s+(patents|inventions|patentable\\s+ideas).*?(shall|must|will).*?(belong|vest|transfer)\\s+(to\\s+)?(the\\s+)?(company|employer)"
+                ]
+            },
+            "conditions": {},
+            "verdict": "High Risk",
+            "confidence": "medium",
+            "explanation_template": "This clause broadly assigns all patent rights including potentially prior inventions. Under the Patents Act, 1970, only inventions made during employment in the employer's field can be reasonably claimed.",
+            "recommendation": "Limit patent assignment to inventions made during employment and directly related to company's business. Explicitly list and exclude prior inventions.",
+            "legal_reference": "Patents Act, 1970, Section 6: Persons entitled to apply for patent include the inventor or their assignee. Employment agreements can only lawfully assign inventions made in the course of employment.",
+            "examples": [
+                "Employee assigns all patents and patentable inventions to the Company.",
+                "Any inventions made during the employment period shall be the Company's property."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "CONFIDENTIALITY_LIFETIME_001",
+            "statute": "Indian Contract Act, 1872 – Section 27",
+            "category": "restraint_of_trade",
+            "severity": "medium",
+            "patterns": {
+                "required_keywords": [
+                    "confidentiality",
+                    "non-disclosure",
+                    "nda",
+                    "confidential information",
+                    "proprietary information",
+                    "shall not disclose",
+                    "must not disclose",
+                    "keep confidential"
+                ],
+                "optional_keywords": [
+                    "perpetual",
+                    "forever",
+                    "indefinitely",
+                    "indefinite",
+                    "lifetime",
+                    "in perpetuity",
+                    "no time limit",
+                    "no expiry",
+                    "without limitation",
+                    "always",
+                    "survive termination",
+                    "continued after",
+                    "post-termination"
+                ],
+                "exclusion_keywords": [],
+                "regex_patterns": [
+                    "confidenti(al|ality).*?(forever|perpetual|indefinite|lifetime|no\\s+time\\s+limit|no\\s+expiry)",
+                    "shall\\s+(never|not\\s+ever)\\s+disclose",
+                    "confidentiality.*?survives?.*?(termination|expir|end)"
+                ]
+            },
+            "conditions": {},
+            "verdict": "Potentially Excessive",
+            "confidence": "medium",
+            "explanation_template": "This clause imposes a perpetual or post-termination confidentiality obligation. While time-limited NDAs are valid, indefinite obligations covering general industry knowledge may be challenged as restraints of trade.",
+            "recommendation": "Negotiate a time-limited NDA (2-5 years). Ensure confidentiality covers only specific confidential information, not general industry knowledge or publicly available information.",
+            "legal_reference": "Indian Contract Act, 1872, Section 27: Perpetual restrictions may be challenged if they effectively restrain lawful trade or profession.",
+            "examples": [
+                "Employee shall maintain confidentiality of all company information indefinitely.",
+                "NDA obligations shall survive termination of this agreement without time limit."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "IP_WORK_FOR_HIRE_FREELANCER_001",
+            "statute": "Copyright Act, 1957 – Section 17",
+            "category": "ip_overreach",
+            "severity": "medium",
+            "patterns": {
+                "required_keywords": [
+                    "work for hire",
+                    "work made for hire",
+                    "commissioned work",
+                    "works for hire",
+                    "made for hire"
+                ],
+                "optional_keywords": [
+                    "freelancer",
+                    "contractor",
+                    "consultant",
+                    "independent contractor",
+                    "vendor",
+                    "service provider"
+                ],
+                "exclusion_keywords": [],
+                "regex_patterns": [
+                    "work.*?for\\s+hire",
+                    "commissioned.*?work.*?(belong|vest|assign|transfer)"
+                ]
+            },
+            "conditions": {},
+            "verdict": "Review Needed",
+            "confidence": "medium",
+            "explanation_template": "This clause classifies your work as 'work for hire', giving the company copyright. Under Indian copyright law, 'work for hire' provisions mainly apply to employees — not independent contractors. As a freelancer, you retain copyright unless you explicitly assign it.",
+            "recommendation": "As a freelancer or independent contractor, ensure that any IP assignment is explicit and limited to specific deliverables contracted for this project.",
+            "legal_reference": "Copyright Act, 1957, Section 17: Work-for-hire provisions apply primarily to employees. For contractors, copyright must be explicitly assigned by written agreement.",
+            "examples": [
+                "All deliverables shall be considered works made for hire and shall belong exclusively to the Client.",
+                "Contractor agrees that all creative output constitutes work made for hire."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "CONTRACT_INDEMNITY_UNLIMITED_001",
+            "statute": "Indian Contract Act, 1872 – Section 124",
+            "category": "excessive_penalty",
+            "severity": "high",
+            "patterns": {
+                "required_keywords": [
+                    "indemnify",
+                    "indemnification",
+                    "hold harmless",
+                    "indemnity",
+                    "shall indemnify",
+                    "agrees to indemnify",
+                    "indemnify and defend",
+                    "indemnify and hold harmless",
+                    "defend and indemnify"
+                ],
+                "optional_keywords": [
+                    "unlimited",
+                    "any and all losses",
+                    "all damages",
+                    "any claims",
+                    "any liabilities",
+                    "all costs",
+                    "consequential damages",
+                    "indirect damages",
+                    "lost profits",
+                    "including indirect",
+                    "including special damages"
+                ],
+                "exclusion_keywords": [
+                    "limited to direct damages",
+                    "cap on liability",
+                    "liability limited to"
+                ],
+                "regex_patterns": [
+                    "indemnif(y|ication).*?(all|any|unlimited|consequential|indirect)\\s+(damages|losses|costs|claims|liabilities)"
+                ]
+            },
+            "conditions": {},
+            "verdict": "High Risk",
+            "confidence": "medium",
+            "explanation_template": "This is a broad indemnification clause. You may be required to cover all damages (including indirect and consequential) arising from disputes — potentially far exceeding the contract value.",
+            "recommendation": "Negotiate caps on indemnification liability (e.g., limited to the contract value). Exclude consequential, indirect, and speculative damages from the indemnification scope.",
+            "legal_reference": "Indian Contract Act, 1872, Section 124: A contract of indemnity is a contract to save the promisee from loss. Courts assess whether the scope is reasonable.",
+            "examples": [
+                "Contractor shall indemnify the Company for any and all losses, including consequential damages.",
+                "You agree to defend and indemnify us for all claims arising from your services."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "CONTRACT_GOVERNING_LAW_FOREIGN_001",
+            "statute": "Indian Contract Act, 1872 – General Principles",
+            "category": "jurisdiction_overreach",
+            "severity": "medium",
+            "patterns": {
+                "required_keywords": [
+                    "governed by",
+                    "governing law",
+                    "applicable law",
+                    "laws of",
+                    "subject to laws",
+                    "pursuant to laws",
+                    "in accordance with laws",
+                    "law of the land"
+                ],
+                "optional_keywords": [
+                    "foreign",
+                    "international",
+                    "usa",
+                    "uk",
+                    "singapore",
+                    "australia",
+                    "canada",
+                    "european",
+                    "state of",
+                    "england and wales",
+                    "province of",
+                    "commonwealth"
+                ],
+                "exclusion_keywords": [
+                    "laws of india",
+                    "indian law",
+                    "republic of india",
+                    "governed by indian",
+                    "subject to indian law",
+                    "governed by the laws of india"
+                ],
+                "regex_patterns": [
+                    "governed\\s+by\\s+the\\s+laws\\s+of\\s+(?!india|the\\s+republic\\s+of\\s+india)\\w+",
+                    "applicable\\s+law.*?shall\\s+be\\s+(?!indian|india)\\w+"
+                ]
+            },
+            "conditions": {},
+            "verdict": "Review Required",
+            "confidence": "medium",
+            "explanation_template": "This clause subjects the contract to foreign law, which could make enforcement of your rights very expensive and complex.",
+            "recommendation": "Negotiate to apply Indian law. If foreign law is insisted upon, ensure you understand its implications and consult a lawyer familiar with that jurisdiction.",
+            "legal_reference": "Indian Contract Act, 1872: Indian courts generally respect choice-of-law clauses, but may apply mandatory Indian provisions to protect Indian parties.",
+            "examples": [
+                "This agreement shall be governed by the laws of England and Wales.",
+                "Applicable law shall be the laws of the State of California, USA."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "CONTRACT_LIMITATION_OF_LIABILITY_001",
+            "statute": "Indian Contract Act, 1872 – Section 74",
+            "category": "unfair_terms",
+            "severity": "medium",
+            "patterns": {
+                "required_keywords": [
+                    "limitation of liability",
+                    "limit of liability",
+                    "maximum liability",
+                    "aggregate liability",
+                    "total liability",
+                    "shall not be liable",
+                    "no liability for",
+                    "liability is limited",
+                    "liability shall not exceed",
+                    "disclaim all liability",
+                    "disclaim any liability",
+                    "not responsible for",
+                    "not liable for any"
+                ],
+                "optional_keywords": [
+                    "consequential",
+                    "indirect",
+                    "incidental",
+                    "special damages",
+                    "loss of profit",
+                    "loss of revenue",
+                    "punitive damages"
+                ],
+                "exclusion_keywords": [],
+                "regex_patterns": [
+                    "(maximum|aggregate|total)\\s+liability.*?(shall)?\\s+not\\s+exceed",
+                    "in\\s+no\\s+event\\s+(shall|will).*?(be\\s+liable|have\\s+liability)"
+                ]
+            },
+            "conditions": {},
+            "verdict": "Review Required",
+            "confidence": "medium",
+            "explanation_template": "This clause severely limits one party's liability, often excluding indirect and consequential damages. This may leave you with little recourse even for significant losses caused by the other party.",
+            "recommendation": "Ensure liability limitations are mutual and proportionate. Exclusions of consequential damages should be mutual and clearly defined.",
+            "legal_reference": "Indian Contract Act, 1872, Section 74: Courts assess whether limitation-of-liability clauses are unconscionable or contrary to public policy.",
+            "examples": [
+                "In no event shall either party be liable for indirect, incidental, or consequential damages.",
+                "Maximum liability of the company shall not exceed INR 100 under any circumstances."
+            ],
+            "enabled": true
+        }
+    ]
+}

@@ -1,0 +1,103 @@
+{
+    "rules": [
+        {
+            "rule_id": "ICA_S23_UNLAWFUL_OBJECT_001",
+            "statute": "Section 23, Indian Contract Act, 1872",
+            "category": "unlawful_consideration",
+            "severity": "critical",
+            "patterns": {
+                "required_keywords": [
+                    "illegal",
+                    "fraudulent",
+                    "defeat the law",
+                    "circumvent",
+                    "evade",
+                    "money laundering",
+                    "bribe",
+                    "kickback",
+                    "tax evasion",
+                    "black money"
+                ],
+                "optional_keywords": [
+                    "under the table",
+                    "off the books",
+                    "unreported",
+                    "cash payment"
+                ],
+                "regex_patterns": [
+                    "avoid\\s+(tax|taxes|taxation)",
+                    "evade\\s+(law|regulation|compliance)"
+                ]
+            },
+            "verdict": "Likely Void",
+            "confidence": "high",
+            "explanation_template": "This clause appears to involve unlawful consideration or object. Section 23 of the Indian Contract Act declares agreements with illegal purposes, fraudulent intent, or that defeat legal provisions as VOID. Such contracts are unenforceable.",
+            "recommendation": "Do not sign this contract. Any agreement with unlawful object is void ab initio (void from the beginning) and may expose you to legal liability.",
+            "legal_reference": "Section 23: The consideration or object of an agreement is unlawful if it is forbidden by law, or is of such a nature that, if permitted, it would defeat the provisions of any law, or is fraudulent.",
+            "examples": [
+                "Payment shall be made in cash to evade taxation.",
+                "Consultant agrees to assist in circumventing regulatory requirements."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "ICA_S23_IMMORAL_OBJECT_001",
+            "statute": "Section 23, Indian Contract Act, 1872",
+            "category": "unlawful_consideration",
+            "severity": "critical",
+            "patterns": {
+                "required_keywords": [
+                    "immoral",
+                    "opposed to public policy",
+                    "against public interest",
+                    "public morality"
+                ],
+                "regex_patterns": [
+                    "contrary\\s+to\\s+public\\s+policy",
+                    "injurious\\s+to\\s+public\\s+interest"
+                ]
+            },
+            "verdict": "Likely Void",
+            "confidence": "medium",
+            "explanation_template": "This clause may involve consideration opposed to public policy or morality. Section 23 declares such agreements void. Courts have wide discretion in determining what constitutes 'public policy' violations.",
+            "recommendation": "Seek legal advice. Agreements against public policy are unenforceable and may have legal consequences.",
+            "legal_reference": "Section 23: Agreements are void if the Court regards them as immoral or opposed to public policy.",
+            "examples": [
+                "Consultant agrees to promote products known to be harmful to public health."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "ICA_S23_INJURY_TO_PERSON_001",
+            "statute": "Section 23, Indian Contract Act, 1872",
+            "category": "unlawful_consideration",
+            "severity": "high",
+            "patterns": {
+                "required_keywords": [
+                    "injury to person",
+                    "injury to property",
+                    "harm to",
+                    "damage to property"
+                ],
+                "optional_keywords": [
+                    "third party",
+                    "another person",
+                    "other parties"
+                ],
+                "regex_patterns": [
+                    "cause\\s+harm\\s+to",
+                    "injure\\s+(person|property|party)"
+                ]
+            },
+            "verdict": "Likely Void",
+            "confidence": "high",
+            "explanation_template": "This clause involves or implies injury to person or property of another. Section 23 declares such agreements void as they have unlawful objects.",
+            "recommendation": "Do not sign. Agreements that involve causing harm are void and may lead to criminal liability.",
+            "legal_reference": "Section 23: Agreements are void if they involve or imply injury to the person or property of another.",
+            "examples": [
+                "Contractor agrees to dispose of waste in manner that may harm neighboring properties."
+            ],
+            "enabled": true
+        }
+    ]
+}

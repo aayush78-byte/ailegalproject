@@ -1,0 +1,153 @@
+{
+    "rules": [
+        {
+            "rule_id": "IP_COPYRIGHT_OVERREACH_001",
+            "statute": "Copyright Act, 1957 / Contract Law Principles",
+            "category": "ip_overreach",
+            "severity": "medium",
+            "patterns": {
+                "required_keywords": [
+                    "intellectual property",
+                    "ip",
+                    "copyright",
+                    "patent",
+                    "invention",
+                    "creation",
+                    "work product"
+                ],
+                "optional_keywords": [
+                    "all work",
+                    "any work",
+                    "everything created",
+                    "all inventions",
+                    "automatically assigned",
+                    "perpetual",
+                    "irrevocable",
+                    "worldwide",
+                    "personal projects",
+                    "off-duty",
+                    "outside work hours",
+                    "own time"
+                ],
+                "regex_patterns": [
+                    "all\\s+(work|inventions|creations|ip|intellectual\\s+property)",
+                    "any\\s+(work|invention|creation)",
+                    "including.*personal",
+                    "outside\\s+(work|office|employment)"
+                ]
+            },
+            "verdict": "Medium Risk",
+            "confidence": "high",
+            "explanation_template": "This IP assignment clause is overly broad. It may claim ownership of work created: (1) on your personal time, (2) unrelated to company business, or (3) using your own resources. While employers can claim work-for-hire during employment, clauses extending to personal projects or off-hours work are unreasonable and may be unenforceable.",
+            "recommendation": "Negotiate to limit IP assignment to: (1) Work created during employment hours, (2) Using company resources, (3) Related to company's business, (4) Specifically commissioned by company. Exclude personal projects, pre-existing IP, and off-hours work unrelated to company.",
+            "legal_reference": "Copyright Act Sec 64: Assignment must be clearly defined in scope. Work-for-hire applies to employment-related work, not personal projects.",
+            "examples": [
+                "All inventions, whether created during or outside work hours, automatically belong to the Company.",
+                "Employee assigns all IP rights, including personal projects, perpetually and irrevocably to Company.",
+                "Any work product created during employment term, including off-duty creations, is Company property."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "IP_COPYRIGHT_PERPETUAL_001",
+            "statute": "Copyright Act, 1957",
+            "category": "ip_overreach",
+            "severity": "medium",
+            "patterns": {
+                "required_keywords": [
+                    "perpetual",
+                    "irrevocable",
+                    "permanent",
+                    "forever",
+                    "in perpetuity"
+                ],
+                "required_all_keywords": [
+                    "ip",
+                    "copyright",
+                    "intellectual property",
+                    "invention"
+                ],
+                "regex_patterns": [
+                    "perpetual.*irrevocable",
+                    "forever.*worldwide"
+                ]
+            },
+            "verdict": "Review Needed",
+            "confidence": "medium",
+            "explanation_template": "This clause assigns IP rights on a perpetual and irrevocable basis. While such terms are legally valid for work-for-hire created during employment, ensure this applies ONLY to work specifically created for the company, not personal projects or pre-existing IP.",
+            "recommendation": "Clarify that perpetual assignment applies only to work-for-hire created during employment for company purposes. Exclude personal IP and creations outside the scope of work.",
+            "legal_reference": "Copyright Act Sec 64: Copyright assignment can be perpetual but must be clearly defined in scope and duration context.",
+            "examples": [
+                "Employee grants perpetual, irrevocable, worldwide license to all IP created.",
+                "All copyright is assigned to Company forever, without reversion rights."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "IP_MORAL_RIGHTS_WAIVER_001",
+            "statute": "Copyright Act, 1957, Section 57",
+            "category": "ip_overreach",
+            "severity": "low",
+            "patterns": {
+                "required_keywords": [
+                    "moral rights",
+                    "waive moral rights",
+                    "attribution",
+                    "paternity rights"
+                ],
+                "optional_keywords": [
+                    "special rights",
+                    "author's rights"
+                ],
+                "regex_patterns": [
+                    "waive.*moral\\s+rights",
+                    "give\\s+up.*attribution"
+                ]
+            },
+            "verdict": "Review Needed",
+            "confidence": "medium",
+            "explanation_template": "This clause asks you to waive moral rights (right to attribution and integrity of work). In India, Section 57 of Copyright Act grants authors certain inalienable moral rights. While contractual waivers are possible for works-for-hire, courts may scrutinize broad waivers.",
+            "recommendation": "Understand that you're waiving rights to be credited as creator and to object to modifications. This is reasonable for standard employment works but consider implications for creative/artistic work.",
+            "legal_reference": "Copyright Act Sec 57: Author has moral rights of paternity (attribution) and integrity, independent of copyright ownership.",
+            "examples": [
+                "Employee waives all moral rights in works created.",
+                "No attribution or credit will be provided for Employee's contributions."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "IP_PRE_EXISTING_IP_001",
+            "statute": "Contract Law Principles",
+            "category": "ip_overreach",
+            "severity": "high",
+            "patterns": {
+                "required_keywords": [
+                    "pre-existing",
+                    "prior",
+                    "before employment",
+                    "previously created"
+                ],
+                "required_all_keywords": [
+                    "ip",
+                    "intellectual property",
+                    "rights",
+                    "assign"
+                ],
+                "regex_patterns": [
+                    "prior\\s+to\\s+employment.*ip",
+                    "pre-existing.*intellectual\\s+property"
+                ]
+            },
+            "verdict": "High Risk",
+            "confidence": "high",
+            "explanation_template": "This clause attempts to claim ownership of IP you created BEFORE joining the company. This is grossly unfair and likely unenforceable. Your pre-existing IP belongs to you unless explicitly sold/licensed separately.",
+            "recommendation": "Explicitly exclude all pre-existing IP from the assignment clause. Maintain a documented list of your prior work/projects and attach it to the contract as an exclusion schedule.",
+            "legal_reference": "Basic contract principles: Parties cannot retroactively claim ownership of property not created under the contract relationship.",
+            "examples": [
+                "Employee assigns all IP, including any created prior to employment.",
+                "All intellectual property, past and future, belongs to Company."
+            ],
+            "enabled": true
+        }
+    ]
+}

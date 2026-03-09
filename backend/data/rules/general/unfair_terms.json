@@ -1,0 +1,189 @@
+{
+    "rules": [
+        {
+            "rule_id": "UNFAIR_UNILATERAL_CHANGE_001",
+            "statute": "Section 16, Indian Contract Act (Undue Influence) / General Contract Principles",
+            "category": "unfair_terms",
+            "severity": "medium",
+            "patterns": {
+                "required_keywords": [
+                    "at sole discretion",
+                    "sole discretion of company",
+                    "unilateral right",
+                    "company may change",
+                    "company reserves the right",
+                    "modify at any time",
+                    "amend without notice"
+                ],
+                "optional_keywords": [
+                    "without consent",
+                    "without agreement",
+                    "without mutual consent",
+                    "at company's option"
+                ],
+                "regex_patterns": [
+                    "company\\s+(may|can|reserves).*change",
+                    "modify.*without.*consent",
+                    "at\\s+.*sole\\s+discretion"
+                ]
+            },
+            "verdict": "Unfair",
+            "confidence": "high",
+            "explanation_template": "This clause gives the company unilateral power to change contract terms without your consent. This creates an imbalanced relationship where your obligations are fixed but the company can modify terms arbitrarily. Such clauses may be challenged as unconscionable or involving undue influence.",
+            "recommendation": "Add requirement for: (1) Written notice of changes, (2) Reasonable notice period (30-60 days), (3) Mutual consent for material changes, or (4) Right to terminate if you don't accept changes.",
+            "legal_reference": "Section 16: Contracts where one party can dominate the will of another may be voidable for undue influence. One-sided modification rights create power imbalance.",
+            "examples": [
+                "Company may modify compensation and terms at its sole discretion without notice.",
+                "The Company reserves the right to change any clause unilaterally at any time.",
+                "Terms may be amended by Company without Employee consent."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "UNFAIR_TERMINATION_WITHOUT_CAUSE_001",
+            "statute": "General Employment Law Principles",
+            "category": "unfair_terms",
+            "severity": "medium",
+            "patterns": {
+                "required_keywords": [
+                    "without cause",
+                    "without reason",
+                    "without notice",
+                    "at will",
+                    "terminate at any time"
+                ],
+                "optional_keywords": [
+                    "immediate",
+                    "no obligation",
+                    "no liability",
+                    "company may terminate"
+                ],
+                "regex_patterns": [
+                    "terminate.*without\\s+(cause|reason|notice)",
+                    "at\\s+will\\s+employment"
+                ]
+            },
+            "verdict": "Unfair",
+            "confidence": "medium",
+            "explanation_template": "This clause allows the company to terminate employment without cause or notice. While 'at-will employment' is common in the US, it's less favorable in India where employment protections are stronger. One-sided termination rights without reciprocal employee rights create unfairness.",
+            "recommendation": "Negotiate for: (1) Notice period requirements for both parties, (2) Severance pay if terminated without cause, (3) Clear definition of 'cause' for termination, (4) Equal termination rights for employee.",
+            "legal_reference": "Industrial Disputes Act and employment principles favor reasonable notice and fair termination procedures.",
+            "examples": [
+                "Company may terminate Employee at any time without cause or notice.",
+                "This is an at-will employment; either party may terminate immediately.",
+                "Employment may be terminated by Company without reason with immediate effect."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "UNFAIR_LIABILITY_WAIVER_001",
+            "statute": "Contract Law Principles / Consumer Protection",
+            "category": "unfair_terms",
+            "severity": "high",
+            "patterns": {
+                "required_keywords": [
+                    "waive all claims",
+                    "no liability",
+                    "not liable",
+                    "hold harmless",
+                    "indemnify",
+                    "release from liability"
+                ],
+                "optional_keywords": [
+                    "any damages",
+                    "all losses",
+                    "negligence",
+                    "gross negligence",
+                    "willful misconduct"
+                ],
+                "regex_patterns": [
+                    "company\\s+(is\\s+)?not\\s+liable",
+                    "waive.*all\\s+claims",
+                    "release.*from\\s+(any|all)\\s+liability"
+                ]
+            },
+            "verdict": "High Risk",
+            "confidence": "high",
+            "explanation_template": "This clause attempts to waive the company's liability even for negligence or misconduct. Indian courts generally do not enforce blanket liability waivers, especially for gross negligence, willful misconduct, or violations of statutory rights. Such clauses may be void as being against public policy.",
+            "recommendation": "Limit liability waivers to specific, reasonable contexts. Do not accept blanket waivers for all liability including negligence. Company should remain liable for: (1) Willful misconduct, (2) Gross negligence, (3) Statutory violations, (4) Safety obligations.",
+            "legal_reference": "Section 23: Clauses exempting liability for gross negligence or willful misconduct may be void as against public policy.",
+            "examples": [
+                "Employee waives all claims against Company for any damages, including those arising from Company's negligence.",
+                "Company shall not be liable for any injury or loss, even if caused by Company's fault.",
+                "Employee releases Company from all liability for workplace accidents."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "UNFAIR_CONFIDENTIALITY_OVERREACH_001",
+            "statute": "General Contract Principles",
+            "category": "unfair_terms",
+            "severity": "medium",
+            "patterns": {
+                "required_keywords": [
+                    "confidentiality",
+                    "confidential information",
+                    "nda",
+                    "non-disclosure"
+                ],
+                "optional_keywords": [
+                    "perpetually",
+                    "forever",
+                    "indefinitely",
+                    "all information",
+                    "any information",
+                    "everything"
+                ],
+                "regex_patterns": [
+                    "all\\s+information.*confidential",
+                    "perpetual.*confidentiality",
+                    "forever.*confidential"
+                ]
+            },
+            "verdict": "Review Needed",
+            "confidence": "medium",
+            "explanation_template": "This confidentiality clause is overly broad. Reasonable NDAs protect legitimately confidential business information, but this clause may extend to: (1) Public information, (2) Information you already knew, (3) Information independently developed, or (4) have perpetual duration. Overly broad NDAs are oppressive.",
+            "recommendation": "Negotiate for clearly defined confidential information with standard exceptions: (1) Public domain information, (2) Information you possessed before employment, (3) Information independently developed, (4) Information required to be disclosed by law. Limit duration to 2-5 years post-employment for most information (trade secrets can be perpetual).",
+            "legal_reference": "Contract principles: Confidentiality obligations must be reasonable in scope and duration.",
+            "examples": [
+                "All information learned during employment is confidential forever.",
+                "Employee shall never disclose any information related to Company, indefinitely.",
+                "Everything discussed, seen, or heard is perpetually confidential."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "UNFAIR_JURISDICTION_FARAWAY_001",
+            "statute": "Code of Civil Procedure",
+            "category": "jurisdiction",
+            "severity": "medium",
+            "patterns": {
+                "required_keywords": [
+                    "jurisdiction",
+                    "courts",
+                    "exclusive jurisdiction",
+                    "subject to jurisdiction"
+                ],
+                "optional_keywords": [
+                    "only",
+                    "solely",
+                    "exclusively"
+                ],
+                "regex_patterns": [
+                    "courts\\s+of\\s+([A-Z][a-z]+(?:\\s+[A-Z][a-z]+)?)",
+                    "jurisdiction\\s+of\\s+([A-Z][a-z]+)"
+                ]
+            },
+            "verdict": "Review Needed",
+            "confidence": "low",
+            "explanation_template": "This clause specifies jurisdiction in a particular location{jurisdiction}. If this location is far from where you live/work, it creates practical difficulty and expense in case of disputes. While parties can agree on jurisdiction, courts may intervene if the chosen forum is oppressive.",
+            "recommendation": "Negotiate for jurisdiction in: (1) Location where you work, (2) Your city of residence, or (3) Mutual convenient location. Consider arbitration as alternative dispute resolution. Be wary of foreign jurisdiction clauses.",
+            "legal_reference": "CPC allows parties to choose jurisdiction, but courts retain discretion to transfer cases if chosen forum is oppressive or inconvenient.",
+            "examples": [
+                "Disputes shall be subject to exclusive jurisdiction of courts in Mumbai (when employee works in Bangalore).",
+                "All disputes subject to courts of Singapore only."
+            ],
+            "enabled": true
+        }
+    ]
+}

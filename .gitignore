@@ -1,0 +1,26 @@
+
+# Python
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.pytest_cache/
+server.log
+
+# Node/React
+node_modules/
+dist/
+.DS_Store
+dev-server.log
+
+# IDEs
+.vscode/
+.idea/
+
+# Database
+backend/chroma_db/
+backend/data/*.pdf
+backend/data/*.docx
+backend/data/uploads/

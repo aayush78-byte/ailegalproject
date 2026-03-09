@@ -1,0 +1,136 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Legal Rule Schema",
+  "description": "Schema for defining legal verification rules in the AI Legal Sentinel system",
+  "type": "object",
+  "required": ["rule_id", "statute", "category", "severity", "patterns", "verdict"],
+  "properties": {
+    "rule_id": {
+      "type": "string",
+      "description": "Unique identifier for this rule (e.g., 'ICA_S27_NONCOMPETE_001')",
+      "pattern": "^[A-Z0-9_]+$"
+    },
+    "statute": {
+      "type": "string",
+      "description": "Legal statute reference (e.g., 'Section 27, Indian Contract Act, 1872')"
+    },
+    "category": {
+      "type": "string",
+      "description": "Rule category for classification",
+      "enum": [
+        "restraint_of_trade",
+        "unlawful_consideration",
+        "excessive_penalty",
+        "ip_overreach",
+        "unfair_terms",
+        "unclear_terms",
+        "payment_terms",
+        "jurisdiction",
+        "indemnity",
+        "labour_rights",
+        "termination",
+        "confidentiality"
+      ]
+    },
+    "severity": {
+      "type": "string",
+      "description": "Severity level of the violation",
+      "enum": ["critical", "high", "medium", "low"]
+    },
+    "patterns": {
+      "type": "object",
+      "description": "Patterns to match in contract clauses",
+      "properties": {
+        "required_keywords": {
+          "type": "array",
+          "description": "Keywords that MUST be present (OR logic within array)",
+          "items": {"type": "string"}
+        },
+        "required_all_keywords": {
+          "type": "array",
+          "description": "Keywords that ALL must be present (AND logic)",
+          "items": {"type": "string"}
+        },
+        "optional_keywords": {
+          "type": "array",
+          "description": "Keywords that increase match confidence if present",
+          "items": {"type": "string"}
+        },
+        "exclusion_keywords": {
+          "type": "array",
+          "description": "Keywords that negate this rule if present",
+          "items": {"type": "string"}
+        },
+        "regex_patterns": {
+          "type": "array",
+          "description": "Regular expression patterns to match",
+          "items": {"type": "string"}
+        }
+      }
+    },
+    "conditions": {
+      "type": "object",
+      "description": "Additional conditions for rule triggering",
+      "properties": {
+        "min_duration_days": {
+          "type": "number",
+          "description": "Minimum duration threshold in days"
+        },
+        "max_duration_days": {
+          "type": "number",
+          "description": "Maximum duration threshold in days"
+        },
+        "min_percentage": {
+          "type": "number",
+          "description": "Minimum percentage threshold"
+        },
+        "max_percentage": {
+          "type": "number",
+          "description": "Maximum percentage threshold"
+        },
+        "min_amount_inr": {
+          "type": "number",
+          "description": "Minimum amount threshold in INR"
+        },
+        "geographic_scope": {
+          "type": "array",
+          "description": "Geographic scope indicators",
+          "items": {"type": "string"}
+        }
+      }
+    },
+    "verdict": {
+      "type": "string",
+      "description": "Legal verdict for this violation",
+      "enum": ["Likely Void", "High Risk", "Medium Risk", "Review Needed", "Unfair", "Unenforceable"]
+    },
+    "confidence": {
+      "type": "string",
+      "description": "Base confidence level for this rule",
+      "enum": ["high", "medium", "low"],
+      "default": "medium"
+    },
+    "explanation_template": {
+      "type": "string",
+      "description": "Template for generating explanation (supports placeholders like {duration}, {amount}, {percentage})"
+    },
+    "recommendation": {
+      "type": "string",
+      "description": "Actionable recommendation for addressing this violation"
+    },
+    "legal_reference": {
+      "type": "string",
+      "description": "Full text or URL reference to the legal statute"
+    },
+    "examples": {
+      "type": "array",
+      "description": "Example clauses that trigger this rule",
+      "items": {"type": "string"}
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether this rule is currently active",
+      "default": true
+    }
+  }
+}

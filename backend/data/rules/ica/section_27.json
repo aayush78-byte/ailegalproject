@@ -1,0 +1,176 @@
+{
+    "rules": [
+        {
+            "rule_id": "ICA_S27_NONCOMPETE_001",
+            "statute": "Section 27, Indian Contract Act, 1872",
+            "category": "restraint_of_trade",
+            "severity": "critical",
+            "patterns": {
+                "required_keywords": [
+                    "non-compete",
+                    "non compete",
+                    "not compete",
+                    "covenant not to compete",
+                    "restriction on employment",
+                    "restraint from engaging"
+                ],
+                "optional_keywords": [
+                    "competitors",
+                    "similar business",
+                    "competing business",
+                    "rival",
+                    "competitive activity"
+                ],
+                "exclusion_keywords": [
+                    "sale of business",
+                    "goodwill",
+                    "transfer of business",
+                    "sale of undertaking"
+                ],
+                "regex_patterns": [
+                    "shall\\s+not\\s+(work|engage|join|accept)",
+                    "prohibited\\s+from\\s+(working|engaging|competing)",
+                    "refrain\\s+from\\s+(engaging|working|accepting)"
+                ]
+            },
+            "conditions": {
+                "min_duration_days": 1
+            },
+            "verdict": "Likely Void",
+            "confidence": "high",
+            "explanation_template": "This clause contains a non-compete restriction that prevents you from working in your field{duration_text}. In India, Section 27 of the Indian Contract Act, 1872 declares such agreements VOID as they restrain lawful profession, trade, or business. The only exception is when selling a business with goodwill.",
+            "recommendation": "Remove this clause entirely. Non-compete agreements are unenforceable in India. You have a fundamental right to earn a livelihood in your chosen profession.",
+            "legal_reference": "Section 27: Every agreement by which anyone is restrained from exercising a lawful profession, trade or business of any kind, is to that extent void.",
+            "examples": [
+                "Employee shall not engage in any competing business for 2 years after termination.",
+                "You agree not to work with any competitor during and after employment.",
+                "Employee shall refrain from joining competitors for 18 months."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "ICA_S27_SOLICITATION_001",
+            "statute": "Section 27, Indian Contract Act, 1872",
+            "category": "restraint_of_trade",
+            "severity": "high",
+            "patterns": {
+                "required_keywords": [
+                    "non-solicitation",
+                    "non solicitation",
+                    "not solicit",
+                    "shall not approach",
+                    "prohibited from contacting"
+                ],
+                "optional_keywords": [
+                    "clients",
+                    "customers",
+                    "employees",
+                    "contractors",
+                    "business relationships"
+                ],
+                "exclusion_keywords": [
+                    "during employment only",
+                    "while employed"
+                ],
+                "regex_patterns": [
+                    "shall\\s+not\\s+solicit",
+                    "refrain\\s+from\\s+soliciting",
+                    "prohibited\\s+from\\s+soliciting"
+                ]
+            },
+            "conditions": {
+                "min_duration_days": 1
+            },
+            "verdict": "High Risk",
+            "confidence": "high",
+            "explanation_template": "This clause restricts you from contacting clients or employees{duration_text}. While some courts have upheld limited non-solicitation clauses, overly broad restrictions may violate Section 27. Indian courts scrutinize post-employment restrictions heavily.",
+            "recommendation": "Negotiate to limit this clause to: (1) only during employment, or (2) a very short period (30-90 days) post-employment with specific client lists, not blanket restrictions.",
+            "legal_reference": "Section 27 extends to agreements restraining lawful trade, including client relationships.",
+            "examples": [
+                "Employee shall not solicit any clients for 3 years after leaving.",
+                "You shall not approach any customer or employee for 2 years post-termination."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "ICA_S27_GEOGRAPHIC_001",
+            "statute": "Section 27, Indian Contract Act, 1872",
+            "category": "restraint_of_trade",
+            "severity": "critical",
+            "patterns": {
+                "required_keywords": [
+                    "within",
+                    "in the area",
+                    "geographic",
+                    "territory",
+                    "region"
+                ],
+                "required_all_keywords": [
+                    "not work",
+                    "not engage",
+                    "prohibited"
+                ],
+                "optional_keywords": [
+                    "city",
+                    "state",
+                    "country",
+                    "worldwide",
+                    "india"
+                ],
+                "regex_patterns": [
+                    "within\\s+\\d+\\s*(km|kilometers|miles)",
+                    "in\\s+(India|Bangalore|Mumbai|Delhi|any\\s+city)"
+                ]
+            },
+            "conditions": {
+                "geographic_scope": [
+                    "city",
+                    "state",
+                    "country",
+                    "worldwide"
+                ]
+            },
+            "verdict": "Likely Void",
+            "confidence": "high",
+            "explanation_template": "This clause imposes a geographic restriction on your ability to work{geographic_text}. Section 27 prohibits restraints on lawful profession regardless of geographic scope. Such clauses are void in India.",
+            "recommendation": "Remove geographic restrictions entirely. Even limited geographic non-competes are generally unenforceable under Indian law.",
+            "legal_reference": "Section 27 makes no exception for geographically limited restraints of trade.",
+            "examples": [
+                "Employee shall not work in a similar role within 100km of Bangalore.",
+                "Prohibited from engaging in competing business anywhere in India for 1 year."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "ICA_S27_BUSINESS_SALE_EXCEPTION",
+            "statute": "Section 27, Indian Contract Act, 1872",
+            "category": "restraint_of_trade",
+            "severity": "low",
+            "patterns": {
+                "required_keywords": [
+                    "sale of business",
+                    "sale of goodwill",
+                    "transfer of business",
+                    "sale of undertaking"
+                ],
+                "required_all_keywords": [
+                    "not compete",
+                    "refrain from"
+                ],
+                "regex_patterns": [
+                    "upon\\s+sale\\s+of",
+                    "in\\s+connection\\s+with\\s+the\\s+sale"
+                ]
+            },
+            "verdict": "Review Needed",
+            "confidence": "medium",
+            "explanation_template": "This appears to be a non-compete clause in the context of a business sale with goodwill. Section 27 allows such restrictions ONLY when selling a business, and they must be reasonable in scope and duration.",
+            "recommendation": "Ensure this applies only to actual business sale scenarios and has reasonable geographic and time limits. Consult a lawyer to verify enforceability.",
+            "legal_reference": "Section 27 Exception: One who sells the goodwill of a business may agree with the buyer to refrain from carrying on a similar business, within specified local limits.",
+            "examples": [
+                "Upon sale of business and goodwill, seller shall not compete within 50km for 2 years."
+            ],
+            "enabled": true
+        }
+    ]
+}

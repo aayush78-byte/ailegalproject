@@ -1,0 +1,664 @@
+{
+    "rules": [
+        {
+            "rule_id": "LABOUR_MW_001",
+            "statute": "Minimum Wages Act, 1948",
+            "category": "wage_violation",
+            "severity": "critical",
+            "patterns": {
+                "required_keywords": [
+                    "no fixed wage",
+                    "no salary",
+                    "unpaid",
+                    "voluntary service",
+                    "without remuneration",
+                    "without compensation",
+                    "without payment",
+                    "no monetary compensation",
+                    "honorary",
+                    "pro bono",
+                    "no fees",
+                    "without fees",
+                    "no consideration"
+                ],
+                "optional_keywords": [
+                    "intern",
+                    "trainee",
+                    "probation",
+                    "volunteer",
+                    "services"
+                ],
+                "exclusion_keywords": [
+                    "stipend",
+                    "allowance",
+                    "payment shall be made",
+                    "shall be paid"
+                ],
+                "regex_patterns": [
+                    "shall\\s+not\\s+(receive|be\\s+paid|get)\\s+(any\\s+)?(salary|wage|compensation|remuneration|fees)",
+                    "services\\s+(shall\\s+be|are)\\s+(rendered|provided)\\s+without\\s+(any\\s+)?(compensation|payment|fees)"
+                ]
+            },
+            "conditions": {},
+            "verdict": "Likely Illegal",
+            "confidence": "high",
+            "explanation_template": "This clause attempts to engage your services without any compensation. Under the Minimum Wages Act, 1948, all workers are entitled to minimum wage. Zero-compensation agreements are not enforceable in Indian courts.",
+            "recommendation": "Ensure the contract specifies a clear, explicit compensation amount that meets or exceeds the applicable minimum wage for your state and sector.",
+            "legal_reference": "Minimum Wages Act, 1948: No employer shall pay to any employee wages at a rate less than the minimum rate of wages fixed.",
+            "examples": [
+                "The intern will provide services without any compensation or remuneration.",
+                "Freelancer agrees to work voluntarily without any salary."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "LABOUR_PF_001",
+            "statute": "Employees' Provident Funds Act, 1952",
+            "category": "pf_violation",
+            "severity": "high",
+            "patterns": {
+                "required_keywords": [
+                    "no pf",
+                    "no provident fund",
+                    "waive pf",
+                    "exempt from pf",
+                    "opt out of pf",
+                    "no epf",
+                    "exempt from epf",
+                    "waiver of pf",
+                    "pf shall not apply",
+                    "epf shall not apply"
+                ],
+                "optional_keywords": [
+                    "statutory deductions",
+                    "employment benefits",
+                    "employee benefits"
+                ],
+                "exclusion_keywords": [
+                    "freelancer",
+                    "independent contractor",
+                    "consultant agreement"
+                ],
+                "regex_patterns": [
+                    "shall\\s+not\\s+(contribute|deduct|pay)\\s+(to\\s+)?(pf|provident\\s+fund|epf)"
+                ]
+            },
+            "conditions": {},
+            "verdict": "Potentially Illegal",
+            "confidence": "high",
+            "explanation_template": "This clause attempts to waive or exempt PF contributions. Under the EPF Act, 1952, employees cannot waive this statutory right.",
+            "recommendation": "PF contributions cannot be contractually waived for regular employees. Consult a lawyer if you are classified as an employee rather than a contractor.",
+            "legal_reference": "Employees' Provident Funds and Miscellaneous Provisions Act, 1952: Statutory contributions to PF cannot be waived by agreement.",
+            "examples": [
+                "Employee agrees to waive any PF or ESI contributions.",
+                "Employer shall not be required to contribute to EPF for this engagement."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "CONSUMER_JURISDICTION_001",
+            "statute": "Consumer Protection Act, 2019 – Section 2(7)",
+            "category": "jurisdiction_overreach",
+            "severity": "high",
+            "patterns": {
+                "required_keywords": [
+                    "jurisdiction",
+                    "courts of",
+                    "exclusive jurisdiction",
+                    "governing law",
+                    "shall be governed by",
+                    "laws of",
+                    "applicable law",
+                    "dispute resolution",
+                    "arbitration",
+                    "governed by the laws",
+                    "subject to jurisdiction"
+                ],
+                "optional_keywords": [
+                    "foreign",
+                    "international",
+                    "singapore",
+                    "london",
+                    "new york",
+                    "delaware",
+                    "cayman",
+                    "dubai",
+                    "switzerland",
+                    "united kingdom",
+                    "united states",
+                    "usa",
+                    "uk",
+                    "england"
+                ],
+                "exclusion_keywords": [
+                    "courts of india",
+                    "indian courts",
+                    "jurisdiction of india",
+                    "delhi courts",
+                    "mumbai courts",
+                    "high court of india",
+                    "laws of india",
+                    "indian law",
+                    "governed by indian law",
+                    "governed by the laws of india"
+                ],
+                "regex_patterns": [
+                    "jurisdiction\\s+of\\s+(?!india|indian|delhi|mumbai|bombay|bangalore|bengaluru|chennai|madras|kolkata|calcutta|hyderabad|pune|ahmedabad)\\w+",
+                    "governed\\s+by\\s+the\\s+laws\\s+of\\s+(?!india|indian)\\w+"
+                ]
+            },
+            "conditions": {},
+            "verdict": "High Risk",
+            "confidence": "medium",
+            "explanation_template": "This clause designates a foreign jurisdiction for disputes. For Indian parties, this can be prohibitively expensive and impractical.",
+            "recommendation": "Negotiate to change jurisdiction to India. Foreign jurisdiction clauses can deter you from seeking legal remedies.",
+            "legal_reference": "Consumer Protection Act, 2019, Section 2(7): Courts retain jurisdiction to protect Indian consumers even when foreign law clauses are present.",
+            "examples": [
+                "Any disputes shall be resolved exclusively under the jurisdiction of courts in Singapore.",
+                "This agreement shall be governed by the laws of the State of Delaware, USA."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "LABOUR_NOTICE_ASYMMETRY_001",
+            "statute": "Industrial Disputes Act, 1947",
+            "category": "unfair_terms",
+            "severity": "medium",
+            "patterns": {
+                "required_keywords": [
+                    "notice period",
+                    "notice of termination",
+                    "termination notice",
+                    "days notice",
+                    "months notice",
+                    "weeks notice",
+                    "prior notice",
+                    "notice required"
+                ],
+                "optional_keywords": [
+                    "without notice",
+                    "forthwith",
+                    "at any time",
+                    "immediately",
+                    "terminate immediately",
+                    "instant termination",
+                    "company may terminate"
+                ],
+                "exclusion_keywords": []
+            },
+            "conditions": {},
+            "verdict": "Unfair",
+            "confidence": "medium",
+            "explanation_template": "This clause may impose an asymmetric notice period — typically requiring the employee to give extended notice while allowing the company to terminate immediately.",
+            "recommendation": "Negotiate for symmetrical notice periods. If you must give 90 days notice, the company should too. Immediate termination should include pay in lieu of notice.",
+            "legal_reference": "Industrial Disputes Act, 1947: Retrenchment without notice and compensation is prohibited for industrial workers.",
+            "examples": [
+                "Employee must give 90 days notice. Company may terminate immediately without notice."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "LABOUR_WAGE_FORFEITURE_001",
+            "statute": "Payment of Wages Act, 1936 – Section 7",
+            "category": "wage_violation",
+            "severity": "high",
+            "patterns": {
+                "required_keywords": [
+                    "forfeit",
+                    "forfeiture",
+                    "withhold",
+                    "shall lose",
+                    "shall not be entitled to",
+                    "loss of pay",
+                    "deduct",
+                    "clawback",
+                    "claw back",
+                    "hold back",
+                    "suspend payment"
+                ],
+                "optional_keywords": [
+                    "pending dues",
+                    "salary",
+                    "bonus",
+                    "wages",
+                    "incentives",
+                    "earned leave",
+                    "encashment",
+                    "dues",
+                    "remuneration"
+                ],
+                "exclusion_keywords": [
+                    "income tax",
+                    "tds",
+                    "tax deducted"
+                ],
+                "regex_patterns": [
+                    "forfeit\\s+(all|any|pending)\\s+(wages|salary|bonus|dues|compensation)",
+                    "shall\\s+not\\s+(be\\s+entitled\\s+to|receive)\\s+(any|the)\\s+(pending|due|accrued|earned)"
+                ]
+            },
+            "conditions": {},
+            "verdict": "Likely Illegal",
+            "confidence": "high",
+            "explanation_template": "This clause attempts to make you forfeit earned wages. Under the Payment of Wages Act, 1936, employers cannot withhold earned wages except for specific lawful deductions.",
+            "recommendation": "Earned salary cannot be forfeited by contract. Consult a lawyer if this clause is included.",
+            "legal_reference": "Payment of Wages Act, 1936, Section 7: The only deductions permitted from wages are specifically listed; forfeiture of earned wages is not permitted.",
+            "examples": [
+                "Employee shall forfeit all pending dues and bonuses if they resign before completing 2 years."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "CONTRACT_UNILATERAL_CHANGE_001",
+            "statute": "Indian Contract Act, 1872 – Section 14",
+            "category": "unfair_terms",
+            "severity": "high",
+            "patterns": {
+                "required_keywords": [
+                    "sole discretion",
+                    "right to modify",
+                    "right to amend",
+                    "right to change",
+                    "may amend",
+                    "may modify",
+                    "reserves the right",
+                    "unilaterally",
+                    "without consent",
+                    "without prior notice",
+                    "without approval",
+                    "at its discretion",
+                    "at any time without"
+                ],
+                "optional_keywords": [
+                    "terms",
+                    "conditions",
+                    "agreement",
+                    "contract",
+                    "modify",
+                    "amend",
+                    "change",
+                    "alter",
+                    "revise",
+                    "update"
+                ],
+                "exclusion_keywords": [
+                    "by mutual agreement",
+                    "written consent of both parties",
+                    "with consent of both",
+                    "mutual written consent"
+                ],
+                "regex_patterns": [
+                    "(company|employer|client|party)\\s+(may|can|shall|reserves?\\s+the\\s+right)\\s+(to\\s+)?(modify|amend|change|alter|update).*?without\\s+(prior\\s+)?(notice|consent|approval|agreement)"
+                ]
+            },
+            "conditions": {},
+            "verdict": "High Risk",
+            "confidence": "high",
+            "explanation_template": "This clause allows one party to unilaterally change the contract without your consent. Indian contract law requires free consent of all parties for valid contract modifications.",
+            "recommendation": "Negotiate to require written consent from both parties for any amendments.",
+            "legal_reference": "Indian Contract Act, 1872, Section 14: Free consent is essential. Unilateral changes without consent may be void.",
+            "examples": [
+                "The Company reserves the right to modify the terms at any time without prior notice.",
+                "Employer may amend this contract at its sole discretion."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "CONTRACT_NON_COMPETE_001",
+            "statute": "Indian Contract Act, 1872 – Section 27",
+            "category": "restraint_of_trade",
+            "severity": "high",
+            "patterns": {
+                "required_keywords": [
+                    "non-compete",
+                    "non compete",
+                    "not compete",
+                    "shall not compete",
+                    "restraint of trade",
+                    "non-solicitation",
+                    "not solicit",
+                    "shall not engage",
+                    "shall not work",
+                    "shall not be employed",
+                    "shall not join",
+                    "competing business",
+                    "competitive activity",
+                    "shall not carry on",
+                    "refrain from engaging"
+                ],
+                "optional_keywords": [
+                    "period",
+                    "months",
+                    "years",
+                    "after termination",
+                    "post employment",
+                    "after leaving",
+                    "following cessation",
+                    "upon resignation",
+                    "after resignation"
+                ],
+                "exclusion_keywords": []
+            },
+            "conditions": {},
+            "verdict": "Void Under Indian Law",
+            "confidence": "high",
+            "explanation_template": "This is a non-compete or restraint-of-trade clause. Under Section 27 of the Indian Contract Act, 1872, any agreement that restrains a person from carrying on a lawful profession, trade, or business is void.",
+            "recommendation": "Post-employment non-compete clauses are legally void in India and unenforceable. You do not need to agree to these terms.",
+            "legal_reference": "Indian Contract Act, 1872, Section 27: Every agreement by which any one is restrained from exercising a lawful profession, trade or business of any kind, is to that extent void.",
+            "examples": [
+                "Employee shall not work for any competitor for 2 years after leaving.",
+                "Party B shall not engage in any competing business during and for 1 year after this agreement."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "CONTRACT_EXCESSIVE_PENALTY_001",
+            "statute": "Indian Contract Act, 1872 – Section 74",
+            "category": "excessive_penalty",
+            "severity": "high",
+            "patterns": {
+                "required_keywords": [
+                    "liquidated damages",
+                    "penalty",
+                    "penal",
+                    "damages shall be",
+                    "shall pay",
+                    "breach penalty",
+                    "penalty clause",
+                    "compensation for breach",
+                    "pre-agreed damages",
+                    "stipulated damages",
+                    "fixed damages",
+                    "lump sum damages",
+                    "shall be liable to pay",
+                    "liable for damages"
+                ],
+                "optional_keywords": [
+                    "breach",
+                    "termination",
+                    "default",
+                    "violation",
+                    "failure to",
+                    "non-performance"
+                ],
+                "exclusion_keywords": [
+                    "actual damages",
+                    "proven damages",
+                    "court assessment"
+                ],
+                "regex_patterns": [
+                    "penalty\\s+of\\s+(rs\\.?|inr|₹)\\s*[\\d,]+",
+                    "damages?\\s+(of|equal\\s+to|equivalent\\s+to)\\s+(rs\\.?|inr|₹)\\s*[\\d,]+",
+                    "liquidated\\s+damages.*?\\d+\\s*(lakh|crore|months?|percent|%)"
+                ]
+            },
+            "conditions": {},
+            "verdict": "Potentially Unenforceable",
+            "confidence": "medium",
+            "explanation_template": "This clause sets a predetermined penalty or liquidated damages amount. Under Section 74 of the Indian Contract Act, courts can only award reasonable compensation — not necessarily the full pre-agreed amount.",
+            "recommendation": "Courts in India will only enforce penalty clauses to the extent of actual loss suffered. Verify the penalty amount is reasonable and proportionate.",
+            "legal_reference": "Indian Contract Act, 1872, Section 74: When a contract specifies a sum payable for breach, the court awards reasonable compensation, not necessarily the full stipulated amount.",
+            "examples": [
+                "In case of breach, the defaulting party shall pay INR 10 lakhs as liquidated damages.",
+                "A penalty of 50% of contract value shall apply for early termination."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "CONTRACT_CONFIDENTIALITY_PERPETUAL_001",
+            "statute": "Indian Contract Act, 1872 – Section 27",
+            "category": "restraint_of_trade",
+            "severity": "medium",
+            "patterns": {
+                "required_keywords": [
+                    "confidential",
+                    "confidentiality",
+                    "non-disclosure",
+                    "nda",
+                    "shall not disclose",
+                    "keep confidential",
+                    "maintain confidentiality",
+                    "proprietary information",
+                    "trade secrets",
+                    "sensitive information"
+                ],
+                "optional_keywords": [
+                    "perpetual",
+                    "indefinitely",
+                    "forever",
+                    "permanently",
+                    "no time limit",
+                    "without limitation",
+                    "unlimited period",
+                    "one-sided",
+                    "only party b",
+                    "only the employee"
+                ],
+                "exclusion_keywords": [
+                    "mutual",
+                    "both parties",
+                    "reciprocal"
+                ],
+                "regex_patterns": [
+                    "confidential(ity)?.*?(perpetual|indefinite|forever|no\\s+time\\s+limit)"
+                ]
+            },
+            "conditions": {},
+            "verdict": "Potentially Unfair",
+            "confidence": "medium",
+            "explanation_template": "This confidentiality clause may be one-sided or have no time limit. Reasonable NDAs are enforceable in India, but perpetual one-sided NDAs may be challenged as unfair restraints.",
+            "recommendation": "Negotiate time-limited confidentiality (2-5 years) with clear definitions of what constitutes confidential information and mutual obligations.",
+            "legal_reference": "Indian Contract Act, 1872: Reasonable confidentiality obligations are enforceable, but perpetual blanket restrictions may constitute an unlawful restraint of trade.",
+            "examples": [
+                "Employee shall maintain confidentiality indefinitely, even after termination.",
+                "Party B agrees to keep all information confidential with no time limit."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "CONTRACT_IP_OVERREACH_001",
+            "statute": "Copyright Act, 1957",
+            "category": "ip_overreach",
+            "severity": "high",
+            "patterns": {
+                "required_keywords": [
+                    "intellectual property",
+                    "ip",
+                    "copyright",
+                    "all rights",
+                    "all work product",
+                    "all inventions",
+                    "all creations",
+                    "work made for hire",
+                    "assigns all",
+                    "transfer of ip",
+                    "belongs to company",
+                    "belongs to employer",
+                    "property of",
+                    "waive moral rights",
+                    "waiver of moral rights",
+                    "ownership of work",
+                    "created during",
+                    "developed during"
+                ],
+                "optional_keywords": [
+                    "prior work",
+                    "pre-existing",
+                    "background ip",
+                    "outside work hours",
+                    "personal projects",
+                    "without limitation",
+                    "worldwide",
+                    "irrevocable"
+                ],
+                "exclusion_keywords": [
+                    "except prior work",
+                    "excluding background ip",
+                    "mutual ownership",
+                    "joint ownership"
+                ],
+                "regex_patterns": [
+                    "(all|any)\\s+(intellectual\\s+property|ip|copyright|inventions?|work\\s+product).*?(shall\\s+(belong|vest|be\\s+owned)|belongs?\\s+to|is\\s+the\\s+property\\s+of)",
+                    "assigns?\\s+(all|any)\\s+(rights|intellectual\\s+property|copyright)"
+                ]
+            },
+            "conditions": {},
+            "verdict": "High Risk",
+            "confidence": "high",
+            "explanation_template": "This clause attempts to claim ownership of all your intellectual property, potentially including pre-existing work and work done outside company hours. Blanket IP assignment clauses are overly broad.",
+            "recommendation": "Negotiate to limit IP assignment to work specifically created for this project. Explicitly exclude pre-existing IP and work done outside project scope. Preserve your moral rights.",
+            "legal_reference": "Copyright Act, 1957: Author retains moral rights even when economic rights are transferred. Blanket pre-assignment of future works may not be fully enforceable.",
+            "examples": [
+                "All intellectual property created by Employee during employment belongs to the Company.",
+                "Employee assigns all present and future IP rights to the Company."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "CONTRACT_TERMINATION_AT_WILL_001",
+            "statute": "Indian Contract Act, 1872 – Section 39",
+            "category": "unfair_terms",
+            "severity": "medium",
+            "patterns": {
+                "required_keywords": [
+                    "terminate at will",
+                    "terminate at any time",
+                    "terminate without cause",
+                    "terminate for any reason",
+                    "termination without reason",
+                    "without any reason",
+                    "without assigning any reason",
+                    "at our discretion",
+                    "at company's discretion",
+                    "summarily terminate",
+                    "summary termination",
+                    "immediately terminate",
+                    "terminate forthwith"
+                ],
+                "optional_keywords": [
+                    "without notice",
+                    "without compensation",
+                    "without liability",
+                    "no payment",
+                    "no dues"
+                ],
+                "exclusion_keywords": [
+                    "pay in lieu of notice",
+                    "severance",
+                    "compensation shall be paid"
+                ],
+                "regex_patterns": [
+                    "(company|employer|client)\\s+(may|can|shall\\s+have\\s+the\\s+right\\s+to)\\s+terminate.*?without\\s+(cause|reason|notice|compensation)"
+                ]
+            },
+            "conditions": {},
+            "verdict": "Unfair",
+            "confidence": "medium",
+            "explanation_template": "This clause allows the other party to end the contract at any time without reason or compensation. This creates severe imbalance and may be challenged as unconscionable.",
+            "recommendation": "Negotiate for termination with notice period and compensation. Immediate no-fault termination without payment is unfair.",
+            "legal_reference": "Indian Contract Act, 1872, Section 39: Parties cannot be compelled to perform contracts in bad faith. Unconscionable terms may be challenged.",
+            "examples": [
+                "The company may terminate this agreement at any time without assigning any reason.",
+                "Client reserves the right to immediately terminate without any liability."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "CONTRACT_ARBITRATION_UNFAIR_001",
+            "statute": "Arbitration and Conciliation Act, 1996",
+            "category": "jurisdiction_overreach",
+            "severity": "medium",
+            "patterns": {
+                "required_keywords": [
+                    "arbitration",
+                    "arbitral",
+                    "arbitrator",
+                    "shall be arbitrated",
+                    "disputes shall be resolved by arbitration",
+                    "binding arbitration",
+                    "sole arbitrator appointed by",
+                    "arbitration at",
+                    "icc arbitration",
+                    "lcia arbitration",
+                    "siac arbitration"
+                ],
+                "optional_keywords": [
+                    "foreign seat",
+                    "singapore",
+                    "london",
+                    "dubai",
+                    "costs shall be borne by",
+                    "non-refundable",
+                    "no right to appeal",
+                    "final and binding"
+                ],
+                "exclusion_keywords": [
+                    "arbitration in india",
+                    "indian arbitration act",
+                    "seat of arbitration in india"
+                ],
+                "regex_patterns": [
+                    "arbitrat(ion|or)\\s+(shall\\s+be\\s+(held|conducted)|seat.*?)\\s+(in|at)\\s+(?!india|delhi|mumbai|bangalore|chennai)\\w+"
+                ]
+            },
+            "conditions": {},
+            "verdict": "High Risk",
+            "confidence": "medium",
+            "explanation_template": "This clause may require dispute resolution via arbitration in a foreign location, which can be very expensive for Indian parties.",
+            "recommendation": "Ensure arbitration seat is in India under the Arbitration and Conciliation Act, 1996. Oppose foreign-seat arbitration clauses.",
+            "legal_reference": "Arbitration and Conciliation Act, 1996: Governs arbitration in India. Foreign-seat arbitration may be unnecessarily costly.",
+            "examples": [
+                "All disputes shall be resolved by ICC Arbitration with seat in Singapore.",
+                "Binding arbitration shall be the sole remedy, to be conducted in London."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "CONTRACT_AUTO_RENEWAL_001",
+            "statute": "Indian Contract Act, 1872 – General Principles",
+            "category": "unfair_terms",
+            "severity": "medium",
+            "patterns": {
+                "required_keywords": [
+                    "auto-renew",
+                    "auto renew",
+                    "automatic renewal",
+                    "automatically renewed",
+                    "shall renew automatically",
+                    "deemed renewed",
+                    "shall be deemed extended",
+                    "shall continue automatically",
+                    "rollover",
+                    "auto-rollover"
+                ],
+                "optional_keywords": [
+                    "without notice",
+                    "unless terminated",
+                    "unless cancelled",
+                    "60 days",
+                    "90 days",
+                    "30 days prior"
+                ],
+                "exclusion_keywords": [
+                    "with written consent",
+                    "with mutual agreement",
+                    "upon written confirmation"
+                ],
+                "regex_patterns": [
+                    "shall\\s+(auto(matically)?[-\\s]renew|be\\s+(automatically|deemed)\\s+(renewed|extended|continued))"
+                ]
+            },
+            "conditions": {},
+            "verdict": "Review Required",
+            "confidence": "medium",
+            "explanation_template": "This contract auto-renews, which means it binds you again for another term unless you cancel within a specific window, often with short notice.",
+            "recommendation": "Diarise the cancellation deadline. If you want to end the contract, ensure you give notice within the required window. Negotiate shorter auto-renewal terms.",
+            "legal_reference": "Indian Contract Act, 1872: Auto-renewal clauses are valid but may be challenged if the renewal terms are unconscionable or notice requirements unreasonably short.",
+            "examples": [
+                "This agreement shall automatically renew for successive one-year terms.",
+                "Unless terminated 90 days prior, the contract is deemed renewed."
+            ],
+            "enabled": true
+        }
+    ]
+}

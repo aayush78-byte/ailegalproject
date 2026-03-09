@@ -1,0 +1,4 @@
+project_id = "reixxpepferqbdlgnbjc"
+
+[functions.legal-assistant]
+verify_jwt = false

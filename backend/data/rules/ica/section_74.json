@@ -1,0 +1,124 @@
+{
+    "rules": [
+        {
+            "rule_id": "ICA_S74_EXCESSIVE_PENALTY_001",
+            "statute": "Section 74, Indian Contract Act, 1872",
+            "category": "excessive_penalty",
+            "severity": "high",
+            "patterns": {
+                "required_keywords": [
+                    "penalty",
+                    "liquidated damages",
+                    "damages",
+                    "compensation for breach",
+                    "shall pay",
+                    "liable to pay"
+                ],
+                "optional_keywords": [
+                    "breach",
+                    "violation",
+                    "default",
+                    "termination"
+                ],
+                "regex_patterns": [
+                    "(\\d+)\\s*(%|percent|percentage)\\s*of\\s*(salary|compensation|contract|value|amount)",
+                    "Rs\\.?\\s*([\\d,]+)",
+                    "INR\\s*([\\d,]+)",
+                    "(\\d+)\\s*(lakh|lakhs|crore|crores)"
+                ]
+            },
+            "conditions": {
+                "min_percentage": 20
+            },
+            "verdict": "High Risk",
+            "confidence": "high",
+            "explanation_template": "This clause imposes a penalty{amount_text} for breach. Section 74 allows only 'reasonable compensation' for actual losses, not punitive penalties. Indian courts routinely reduce excessive penalties. A penalty exceeding 20% of contract value or salary is often considered excessive.",
+            "recommendation": "Negotiate to cap penalty at actual expected losses (typically 10-15% of contract value). Ensure wording uses 'reasonable compensation' rather than 'penalty'.",
+            "legal_reference": "Section 74: Party complaining of breach is entitled to receive reasonable compensation not exceeding the amount named, whether or not actual damage is proved.",
+            "examples": [
+                "Employee shall pay 50% of annual salary as penalty for leaving before 2 years.",
+                "Contractor liable for liquidated damages of Rs. 10,00,000 for any breach.",
+                "Penalty of 3 months' salary for breach of notice period clause."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "ICA_S74_NOTICE_PERIOD_PENALTY_001",
+            "statute": "Section 74, Indian Contract Act, 1872",
+            "category": "excessive_penalty",
+            "severity": "medium",
+            "patterns": {
+                "required_all_keywords": [
+                    "notice period",
+                    "pay"
+                ],
+                "optional_keywords": [
+                    "salary",
+                    "compensation",
+                    "lieu",
+                    "in lieu of notice"
+                ],
+                "regex_patterns": [
+                    "(\\d+)\\s*months?\\s*(salary|compensation|pay)",
+                    "notice\\s+period.*pay.*salary"
+                ]
+            },
+            "conditions": {
+                "min_duration_days": 90
+            },
+            "verdict": "Review Needed",
+            "confidence": "medium",
+            "explanation_template": "This clause requires payment{duration_text} in lieu of notice period. While notice period compensation is generally valid, the amount must be reasonable. More than 3 months' salary for notice period breach may be considered excessive under Section 74.",
+            "recommendation": "Standard practice in India is 1-3 months' notice or pay in lieu. Ensure the amount is proportional to actual impact of departure without notice.",
+            "legal_reference": "Section 74: Compensation must be reasonable, not punitive. Courts assess whether penalty clause is genuine pre-estimate of loss.",
+            "examples": [
+                "Employee must pay 6 months' salary if failing to serve 3-month notice period.",
+                "Payment of 3 months' gross salary in lieu of notice period required."
+            ],
+            "enabled": true
+        },
+        {
+            "rule_id": "ICA_S74_TRAINING_BOND_001",
+            "statute": "Section 74, Indian Contract Act, 1872",
+            "category": "excessive_penalty",
+            "severity": "high",
+            "patterns": {
+                "required_keywords": [
+                    "training",
+                    "bond",
+                    "training bond",
+                    "service bond"
+                ],
+                "required_all_keywords": [
+                    "reimburse",
+                    "pay back",
+                    "repay"
+                ],
+                "optional_keywords": [
+                    "training cost",
+                    "training expenses",
+                    "course fees",
+                    "certification"
+                ],
+                "regex_patterns": [
+                    "training.*cost.*Rs\\.?\\s*([\\d,]+)",
+                    "serve\\s+for\\s+(\\d+)\\s*(year|years|month|months)"
+                ]
+            },
+            "conditions": {
+                "min_amount_inr": 100000,
+                "min_duration_days": 730
+            },
+            "verdict": "High Risk",
+            "confidence": "medium",
+            "explanation_template": "This training bond requires you to{duration_text} or pay back training costs{amount_text}. While training bonds are legally recognized, they must: (1) involve actual specialized training, (2) have reasonable costs, and (3) have proportional lock-in periods. Courts scrutinize inflated training costs and excessive lock-in periods under Section 74.",
+            "recommendation": "Verify: (1) Actual training provided matches claimed cost, (2) Bond period is proportional to training duration/cost (typically 1-2x training period), (3) Pro-rated amount if leaving mid-period. Negotiate for documentary proof of training expenses.",
+            "legal_reference": "Section 74: Training bond penalties must be reasonable estimates of actual training investment, not punitive measures to prevent resignation.",
+            "examples": [
+                "Employee must serve 3 years or reimburse Rs. 5,00,000 training costs.",
+                "Training bond of Rs. 10 lakhs for 2-week induction program (likely excessive)."
+            ],
+            "enabled": true
+        }
+    ]
+}
